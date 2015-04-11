@@ -1,3 +1,15 @@
+Functional Programming in Scala
+===============================
+
+This is a fork of the repo that accompanies the book,
+[Functional Programming in Scala](http://manning.com/bjarnason/). There are
+exercises in the book that correspond with the
+[exercises folder](https://github.com/stefvhuynh/fpinscala/tree/master/exercises/src/main/scala/fpinscala)
+in this repo. As I follow along in the book, I complete the exercises.
+
+From the original repo
+----------------------
+
 [![Build status](https://travis-ci.org/fpinscala/fpinscala.svg?branch=master)](https://travis-ci.org/fpinscala/fpinscala)
 
 This repository contains exercises, hints, and answers for the book
