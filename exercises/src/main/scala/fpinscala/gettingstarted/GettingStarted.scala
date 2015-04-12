@@ -14,7 +14,7 @@ object MyModule {
   }
 
   def main(args: Array[String]): Unit =
-    println(fib(args(0).toInt))
+    println(formatAbs(-42))
 
   // A definition of factorial, using a local, tail recursive function
   def factorial(n: Int): Int = {
@@ -38,9 +38,9 @@ object MyModule {
 
   def fib(n: Int): Int = {
     @annotation.tailrec
-    def go(n: Int, current: Int, next: Int): Int =
-      if (n == 0) current
-      else go(n - 1, next, current + next)
+    def go(n: Int, curr: Int, next: Int): Int =
+      if (n == 0) curr
+      else go(n - 1, next, curr + next)
 
     go(n, 0, 1)
   }
@@ -127,6 +127,14 @@ object MonomorphicBinarySearch {
 
 object PolymorphicFunctions {
 
+  def main(args: Array[String]): Unit = {
+    val as = Array(1, 3, 6, 7, 5)
+    val sorted = isSorted(as, (x: Int, y: Int) => x > y)
+
+    println("Expected: false")
+    println("Actual:   %b".format(sorted))
+  }
+
   // Here's a polymorphic version of `binarySearch`, parameterized on
   // a function for testing whether an `A` is greater than another `A`.
   def binarySearch[A](as: Array[A], key: A, gt: (A,A) => Boolean): Int = {
@@ -147,7 +155,15 @@ object PolymorphicFunctions {
 
   // Exercise 2: Implement a polymorphic function to check whether
   // an `Array[A]` is sorted
-  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = ???
+  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = {
+    @annotation.tailrec
+    def go(curr: Int): Boolean =
+      if (curr > as.length - 2) true
+      else if (gt(as(curr), as(curr + 1))) false
+      else go(curr + 1)
+
+    go(0)
+  }
 
   // Polymorphic functions are often so constrained by their type
   // that they only have one implementation! Here's an example:
