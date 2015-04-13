@@ -128,18 +128,34 @@ object MonomorphicBinarySearch {
 object PolymorphicFunctions {
 
   def main(args: Array[String]): Unit = {
+    def gt(n: Int, m: Int): Boolean =
+      n > m
+
+    val as = Array(1, 3, 6, 4)
+    println("Expected: false")
+    println("Actual:   %b".format(isSorted(as, gt)))
+
     def sum(n: Int, m: Int): Int =
       n + m
 
     val curriedFn = curry(sum)
     val curriedSum = curriedFn(2)
-
     println("Expected: 12")
     println("Actual:   %d".format(curriedSum(10)))
 
     val uncurriedFn = uncurry(curriedFn)
     println("Expected: 3")
     println("Actual:   %d".format(uncurriedFn(1, 2)))
+
+    def hello(s: String): String =
+      "Hello %s".format(s)
+
+    def says(s: String): String =
+      "Charlie Brown says, '%s'".format(s)
+
+    val composedFn = compose(says, hello)
+    println("Expected: Charlie Brown says, 'Hello Snoopy'")
+    println("Actual:   %s".format(composedFn("Snoopy")))
   }
 
   // Here's a polymorphic version of `binarySearch`, parameterized on
@@ -204,5 +220,5 @@ object PolymorphicFunctions {
   // Exercise 5: Implement `compose`
 
   def compose[A,B,C](f: B => C, g: A => B): A => C =
-    ???
+    (a: A) => f(g(a))
 }
