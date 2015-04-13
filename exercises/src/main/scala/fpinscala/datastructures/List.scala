@@ -56,7 +56,12 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def setHead[A](l: List[A], h: A): List[A] = sys.error("todo")
 
-  def drop[A](l: List[A], n: Int): List[A] = sys.error("todo")
+  def drop[A](l: List[A], n: Int): List[A] =
+    if (n < 1) l
+    else l match {
+      case Nil => sys.error("cannot drop more than length of the list")
+      case Cons(_, t) => drop(t, n - 1)
+    }
 
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = sys.error("todo")
 
