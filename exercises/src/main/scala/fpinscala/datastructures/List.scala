@@ -54,7 +54,10 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(_, t) => t
   }
 
-  def setHead[A](l: List[A], h: A): List[A] = sys.error("todo")
+  def setHead[A](l: List[A], h: A): List[A] = l match {
+    case Nil => Cons(h, Nil)
+    case Cons(_, _) => Cons(h, l)
+  }
 
   def drop[A](l: List[A], n: Int): List[A] =
     if (n < 1) l
