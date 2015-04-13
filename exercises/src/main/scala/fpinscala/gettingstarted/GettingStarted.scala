@@ -136,6 +136,10 @@ object PolymorphicFunctions {
 
     println("Expected: 12")
     println("Actual:   %d".format(curriedSum(10)))
+
+    val uncurriedFn = uncurry(curriedFn)
+    println("Expected: 3")
+    println("Actual:   %d".format(uncurriedFn(1, 2)))
   }
 
   // Here's a polymorphic version of `binarySearch`, parameterized on
@@ -185,7 +189,7 @@ object PolymorphicFunctions {
 
   // Exercise 4: Implement `uncurry`
   def uncurry[A,B,C](f: A => B => C): (A, B) => C =
-    ???
+    (a: A, b: B) => f(a)(b)
 
   /*
   NB: There is a method on the `Function` object in the standard library,
