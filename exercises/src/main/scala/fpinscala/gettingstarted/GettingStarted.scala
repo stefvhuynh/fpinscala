@@ -128,16 +128,19 @@ object MonomorphicBinarySearch {
 object PolymorphicFunctions {
 
   def main(args: Array[String]): Unit = {
-    val as = Array(1, 3, 6, 7, 5)
-    val sorted = isSorted(as, (x: Int, y: Int) => x > y)
+    def sum(n: Int, m: Int): Int =
+      n + m
 
-    println("Expected: false")
-    println("Actual:   %b".format(sorted))
+    val curriedFn = curry(sum)
+    val curriedSum = curriedFn(2)
+
+    println("Expected: 12")
+    println("Actual:   %d".format(curriedSum(10)))
   }
 
   // Here's a polymorphic version of `binarySearch`, parameterized on
   // a function for testing whether an `A` is greater than another `A`.
-  def binarySearch[A](as: Array[A], key: A, gt: (A,A) => Boolean): Int = {
+  def binarySearch[A](as: Array[A], key: A, gt: (A, A) => Boolean): Int = {
     @annotation.tailrec
     def go(low: Int, mid: Int, high: Int): Int = {
       if (low > high) -mid - 1
@@ -155,7 +158,7 @@ object PolymorphicFunctions {
 
   // Exercise 2: Implement a polymorphic function to check whether
   // an `Array[A]` is sorted
-  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = {
+  def isSorted[A](as: Array[A], gt: (A, A) => Boolean): Boolean = {
     @annotation.tailrec
     def go(curr: Int): Boolean =
       if (curr > as.length - 2) true
@@ -168,7 +171,7 @@ object PolymorphicFunctions {
   // Polymorphic functions are often so constrained by their type
   // that they only have one implementation! Here's an example:
 
-  def partial1[A,B,C](a: A, f: (A,B) => C): B => C =
+  def partial1[A,B,C](a: A, f: (A, B) => C): B => C =
     (b: B) => f(a, b)
 
   // Exercise 3: Implement `curry`.
@@ -176,7 +179,7 @@ object PolymorphicFunctions {
   // Note that `=>` associates to the right, so we could
   // write the return type as `A => B => C`
   def curry[A,B,C](f: (A, B) => C): A => (B => C) =
-    ???
+    (a: A) => (b: B) => f(a, b)
 
   // NB: The `Function2` trait has a `curried` method already
 
