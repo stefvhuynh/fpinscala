@@ -99,5 +99,8 @@ object List { // `List` companion object. Contains functions for creating and wo
   def reverse[A](l: List[A]): List[A] =
     foldLeft(l, Nil:List[A])((l, a) => Cons(a, l))
 
+  def append[A](l: List[A], a: A): List[A] =
+    foldRight(l, Cons(a, Nil))((z, zs) => Cons(z, zs))
+
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }
