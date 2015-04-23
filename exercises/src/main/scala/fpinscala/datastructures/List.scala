@@ -107,5 +107,18 @@ object List { // `List` companion object. Contains functions for creating and wo
   def addOne(ns: List[Int]): List[Int] =
     foldRight(ns, Nil:List[Int])((m, ms) => Cons(m + 1, ms))
 
+  def convertToStrings(ns: List[Double]): List[String] = sys.error("todo")
+
+  def filter[A](as: List[A])(f: A => Boolean): List[A] = sys.error("todo")
+
+  def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = sys.error("todo")
+
+  def filterViaFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
+    sys.error("todo")
+
+  def addLists(l1: List[Int], l2: List[Int]): List[Int] = sys.error("todo")
+
+  def hasSubsequence[A](l: List[A], sub: List[A]): Boolean = sys.error("todo")
+
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }
